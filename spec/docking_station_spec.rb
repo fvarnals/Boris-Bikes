@@ -15,15 +15,15 @@ describe DockingStation do
 
   it "when a bike is docked, we can see that a bike has been docked" do
     bike1 = Bike.new
-    expect(subject.dock(bike1)).to eq bike1
+    expect(subject.dock(bike1)).to eq subject.bikes
   end
   it "when there are no bikes docked, should raise an error to release bikes" do
     expect {subject.release_bike}.to raise_error("Error: no bikes available")
   end
   it "when the bike station is full, should raise an error to say it's full" do
-    bike0 = Bike.new
-    subject.dock(bike0)
-    bike1 = Bike.new
-    expect {subject.dock(bike1)}.to raise_error("Error: capacity full")
+    station = DockingStation.new
+    20.times { station.dock Bike.new }
+    bike = Bike.new
+    expect { station.dock(bike) }.to raise_error("Error: capacity full")
   end
 end
