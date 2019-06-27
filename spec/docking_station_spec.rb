@@ -20,4 +20,20 @@ describe DockingStation do
     expect { station.dock(Bike.new) }.to raise_error("Error: capacity full")
   end
 
+  it "when no capacity is specified, capacity will equal default capacity (20) " do
+    expect(DockingStation.new.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
+  it "when a capacity of '7' is specified, capacity will equal '7' " do
+    expect(DockingStation.new(7).capacity).to eq 7
+  end
+
+  it "it does not let you release a broken bike from the docking station" do
+    bike = Bike.new
+    bike.report
+    subject.dock(bike)
+    expect {subject.release_bike}.to raise_error("Error: cannot release broken bike")
+  end
+    
+
 end

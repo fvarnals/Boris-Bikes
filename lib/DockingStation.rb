@@ -19,7 +19,7 @@ class DockingStation
   # end
 
   def release_bike
-    empty? ? (raise "Error: no bikes available") : (@bikes.delete_at(0))
+    empty? ? (raise "Error: no bikes available") : check
   end
 
   def dock(bike)
@@ -36,7 +36,11 @@ class DockingStation
   def empty?
     @bikes.empty?
   end
+
+  def check
+    @bikes[0].broken ? (raise "Error: cannot release broken bike") : (@bikes.delete_at(0))
+  end
   
 end
 
-#binding.pry
+binding.pry
