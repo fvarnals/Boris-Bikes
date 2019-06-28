@@ -2,7 +2,7 @@ require_relative './Bike.rb'
 require 'pry'
 
 class DockingStation
-  
+
   DEFAULT_CAPACITY = 20
 
   def initialize(capacity = DEFAULT_CAPACITY)
@@ -10,12 +10,11 @@ class DockingStation
     @bikes = []
   end
 
-  attr_reader :bike
   attr_reader :bikes
   attr_reader :capacity
   # Equivalent to:
-  # def bike
-  # @bike
+  # def capacity
+  # @capacity
   # end
 
   def release_bike
@@ -26,6 +25,14 @@ class DockingStation
     full? ? (raise "Error: capacity full") : (@bikes << bike)
     #@bike = bike
   end
+
+  # def dock(bike, report = true)
+  #   full? ? (raise "Error: capacity full") : (@bikes << bike)
+  #
+  #   if !report
+  #     bike.change_status
+  #   end
+  # end
 
   private
 
@@ -40,7 +47,7 @@ class DockingStation
   def check
     @bikes[0].broken ? (raise "Error: cannot release broken bike") : (@bikes.delete_at(0))
   end
-  
+
 end
 
 binding.pry
