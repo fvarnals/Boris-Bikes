@@ -22,4 +22,9 @@ describe Van do
       subject.collect_bikes(station)
       expect(subject.release_broken_bikes).to eq [bike1]
     end
+
+    it "van can collect fixed bikes from garage"
+    bike1 = Bike.new
+    garage1 = Garage.new([bike1])
+    van.collect_bikes(garage1)
 end
