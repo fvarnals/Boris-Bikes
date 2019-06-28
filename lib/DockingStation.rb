@@ -34,6 +34,17 @@ class DockingStation
   #   end
   # end
 
+  def release_broken_bikes
+    broken_bikes = []
+    for i in 0..@bikes.length-1
+      if @bikes[i].broken
+        broken_bikes.push(@bikes[i])
+      end
+    end
+
+    @bikes.delete_if { |bike| bike.broken }
+    return broken_bikes
+  end
   private
 
   def full?
