@@ -35,14 +35,15 @@ describe DockingStation do
     expect {subject.release_bike}.to raise_error("Error: cannot release broken bike")
   end
 
-  it "Should transfer broken bikes" do
+  it "Should transfer broken bikes to Van" do
     broken_bike = Bike.new
     broken_bike.report
     broken_bike2 = Bike.new
     broken_bike2.report
     subject.dock(broken_bike)
     subject.dock(broken_bike2)
-    expect(subject.transfer_bikes).to eq [broken_bike, broken_bike2]
+    van = Van.new
+    expect(subject.transfer_bikes(van)).to eq [broken_bike, broken_bike2]
   end
 
 

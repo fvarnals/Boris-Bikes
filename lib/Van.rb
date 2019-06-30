@@ -3,13 +3,9 @@ class Van
     @bikes = bikes
   end
   attr_reader :bikes
+  attr_writer :bikes
 
-  def collect_bikes(dockingstation, broken = true)
-    @bikes = dockingstation.transfer_bikes(broken)
-
-  end
-
-  def transfer_bikes(broken = true)
+  def transfer_bikes(depot, broken = true)
     bikes = []
     for i in 0..@bikes.length-1
       if broken
@@ -21,7 +17,7 @@ class Van
 
     broken ? @bikes.delete_if { |bike| bike.broken } : @bikes.delete_if { |bike| !bike.broken }
 
-    return bikes
+    bikes.each { |bike| depot.bikes.push(bike) }
   end
 
   private

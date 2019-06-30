@@ -1,8 +1,8 @@
 class Bike
 
   attr_writer :broken
-  def initialize
-    @broken = false
+  def initialize(broken = false)
+    @broken = broken
   end
 
   attr_reader :broken

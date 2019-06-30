@@ -12,6 +12,7 @@ class DockingStation
 
   attr_reader :bikes
   attr_reader :capacity
+  attr_writer :bikes
   # Equivalent to:
   # def capacity
   # @capacity
@@ -26,15 +27,7 @@ class DockingStation
     #@bike = bike
   end
 
-  # def dock(bike, report = true)
-  #   full? ? (raise "Error: capacity full") : (@bikes << bike)
-  #
-  #   if !report
-  #     bike.change_status
-  #   end
-  # end
-
-  def transfer_bikes(broken = true)
+  def transfer_bikes(depot, broken = true)
     bikes = []
     for i in 0..@bikes.length-1
       if broken
@@ -46,7 +39,7 @@ class DockingStation
 
     broken ? @bikes.delete_if { |bike| bike.broken } : @bikes.delete_if { |bike| !bike.broken }
 
-    return bikes
+    bikes.each { |bike| depot.bikes.push(bike) }
   end
   private
 

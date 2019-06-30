@@ -3,12 +3,9 @@ class Garage
     @bikes = bikes
   end
   attr_reader :bikes
+  attr_writer :bikes
 
-  def collect_bikes(van)
-    @bikes = van.transfer_bikes
-  end
-
-  def transfer_bikes(broken = true)
+  def transfer_bikes(depot, broken = true)
     bikes = []
     for i in 0..@bikes.length-1
       if broken
@@ -20,8 +17,9 @@ class Garage
 
     broken ? @bikes.delete_if { |bike| bike.broken } : @bikes.delete_if { |bike| !bike.broken }
 
-    return bikes
+    bikes.each { |bike| depot.bikes.push(bike) }
   end
+
   def fix_bikes
     for bike in @bikes
       bike.broken ? bike.change_status : nil
