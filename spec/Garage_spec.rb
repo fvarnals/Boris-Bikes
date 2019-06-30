@@ -1,13 +1,13 @@
 require 'Garage'
 describe Garage do
-
-  it { is_expected.to respond_to(:fix_bikes) }
-  it "can initialize garage with bikes" do
+  it { is_expected.to respond_to(:collect_bikes) }
+  it { is_expected.to respond_to(:transfer_bikes) }
+  it "Can initialize with bikes" do
     bike1 = Bike.new
     expect(Garage.new([bike1]).bikes).to eq [bike1]
   end
 
-  it "when collect_bikes is called garage picks up the broken bikes from the van" do
+  it "Can collect broken bikes from van" do
 
     bike1 = Bike.new
     bike1.report
@@ -15,12 +15,12 @@ describe Garage do
     expect(subject.collect_bikes(van)).to eq [bike1]
 
   end
-  it "when transfer_bikes is called garage returns its bikes and empties its bikes array" do
+  it "Can tranfer bikes out" do
     bike1 = Bike.new
     garage1 = Garage.new([bike1])
     expect(garage1.transfer_bikes(false)).to eq [bike1]
   end
-  it "fixes the garages bikes" do
+  it "Fixes any broken bikes in the garage" do
     bike1 = Bike.new
     bike1.report
     bike2 = Bike.new

@@ -3,7 +3,7 @@ require 'Bike'
 describe Bike do
  it {is_expected.to respond_to(:working?)}
 
- it "when a bike is reported as broken, it docks a broken bike" do
+ it "Bike can be reported as broken" do
     expect(subject.report).to eq true
  end
   # As a member of the public,
