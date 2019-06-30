@@ -5,11 +5,11 @@ class Van
   attr_reader :bikes
 
   def collect_bikes(dockingstation)
-    @bikes = dockingstation.release_broken_bikes
+    @bikes = dockingstation.transfer_bikes
 
   end
 
-  def release_broken_bikes
+  def transfer_bikes
     dropoffbikes = []
     for i in 0..@bikes.length-1
       if @bikes[i].broken

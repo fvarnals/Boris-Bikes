@@ -4,9 +4,9 @@ class Garage
   end
   attr_reader :bikes
   def collect_bikes(van)
-    @bikes = van.release_broken_bikes
+    @bikes = van.transfer_bikes
   end
-  def release_fixed_bikes
+  def transfer_bikes
     dropoffbikes = []
     for i in 0..@bikes.length-1
       if !@bikes[i].broken
@@ -22,7 +22,7 @@ class Garage
       if bike.broken
         bike.change_status
       end
-    end 
+    end
   end
 
 end

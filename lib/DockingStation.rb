@@ -34,7 +34,7 @@ class DockingStation
   #   end
   # end
 
-  def release_broken_bikes
+  def transfer_bikes
     broken_bikes = []
     for i in 0..@bikes.length-1
       if @bikes[i].broken
