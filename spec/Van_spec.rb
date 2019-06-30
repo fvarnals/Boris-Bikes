@@ -27,7 +27,7 @@ describe Van do
     it "can collect fixed bikes from garage" do
       bike1 = Bike.new
       garage1 = Garage.new([bike1])
-      subject.collect_bikes(garage1)
+      subject.collect_bikes(garage1, false)
       expect(subject.bikes).to eq [bike1]
     end
 end

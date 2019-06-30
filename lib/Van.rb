@@ -4,21 +4,32 @@ class Van
   end
   attr_reader :bikes
 
-  def collect_bikes(dockingstation)
-    @bikes = dockingstation.transfer_bikes
+  def collect_bikes(dockingstation, broken = true)
+    @bikes = dockingstation.transfer_bikes(broken)
 
   end
 
-  def transfer_bikes
-    dropoffbikes = []
+  def transfer_bikes(broken = true)
+    bikes = []
     for i in 0..@bikes.length-1
-      if @bikes[i].broken
-        dropoffbikes.push(@bikes[i])
+      if broken
+        broken_transfer(i) ? bikes.push(@bikes[i]) : nil
+      else
+        working_transfer(i) ? bikes.push(@bikes[i]) : nil
       end
     end
 
-    @bikes.delete_if { |bike| bike.broken }
-    return dropoffbikes
+    broken ? @bikes.delete_if { |bike| bike.broken } : @bikes.delete_if { |bike| !bike.broken }
+
+    return bikes
+  end
+
+  private
+  def broken_transfer(i)
+    @bikes[i].broken ? @bikes[i] : false
+  end
+  def working_transfer(i)
+    !@bikes[i].broken ? @bikes[i] : false
   end
 
 end

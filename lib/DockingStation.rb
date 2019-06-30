@@ -34,16 +34,19 @@ class DockingStation
   #   end
   # end
 
-  def transfer_bikes
-    broken_bikes = []
+  def transfer_bikes(broken = true)
+    bikes = []
     for i in 0..@bikes.length-1
-      if @bikes[i].broken
-        broken_bikes.push(@bikes[i])
+      if broken
+        broken_transfer(i) ? bikes.push(@bikes[i]) : nil
+      else
+        working_transfer(i) ? bikes.push(@bikes[i]) : nil
       end
     end
 
-    @bikes.delete_if { |bike| bike.broken }
-    return broken_bikes
+    broken ? @bikes.delete_if { |bike| bike.broken } : @bikes.delete_if { |bike| !bike.broken }
+
+    return bikes
   end
   private
 
@@ -59,6 +62,12 @@ class DockingStation
     @bikes[0].broken ? (raise "Error: cannot release broken bike") : (@bikes.delete_at(0))
   end
 
+  def broken_transfer(i)
+    @bikes[i].broken ? @bikes[i] : false
+  end
+  def working_transfer(i)
+    !@bikes[i].broken ? @bikes[i] : false
+  end
 end
 
 binding.pry

@@ -3,26 +3,36 @@ class Garage
     @bikes = bikes
   end
   attr_reader :bikes
+
   def collect_bikes(van)
     @bikes = van.transfer_bikes
   end
-  def transfer_bikes
-    dropoffbikes = []
+
+  def transfer_bikes(broken = true)
+    bikes = []
     for i in 0..@bikes.length-1
-      if !@bikes[i].broken
-        dropoffbikes.push(@bikes[i])
+      if broken
+        broken_transfer(i) ? bikes.push(@bikes[i]) : nil
+      else
+        working_transfer(i) ? bikes.push(@bikes[i]) : nil
       end
     end
 
-    @bikes.delete_if { |bike| !bike.broken }
-    return dropoffbikes
+    broken ? @bikes.delete_if { |bike| bike.broken } : @bikes.delete_if { |bike| !bike.broken }
+
+    return bikes
   end
   def fix_bikes
     for bike in @bikes
-      if bike.broken
-        bike.change_status
-      end
+      bike.broken ? bike.change_status : nil
     end
   end
 
+  private
+  def broken_transfer(i)
+    @bikes[i].broken ? @bikes[i] : false
+  end
+  def working_transfer(i)
+    !@bikes[i].broken ? @bikes[i] : false
+  end
 end

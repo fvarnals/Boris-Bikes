@@ -18,7 +18,7 @@ describe Garage do
   it "when transfer_bikes is called garage returns its bikes and empties its bikes array" do
     bike1 = Bike.new
     garage1 = Garage.new([bike1])
-    expect(garage1.transfer_bikes).to eq [bike1]
+    expect(garage1.transfer_bikes(false)).to eq [bike1]
   end
   it "fixes the garages bikes" do
     bike1 = Bike.new
