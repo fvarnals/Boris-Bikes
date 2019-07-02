@@ -1,6 +1,9 @@
 require 'DockingStation'
+require 'support/shared_examples_for_bike_container'
 
 describe DockingStation do
+  it_behaves_like BikeContainer
+
 
   it { is_expected.to respond_to(:release_bike) }
   it { is_expected.to respond_to(:dock) }
@@ -34,7 +37,7 @@ describe DockingStation do
     subject.dock(bike)
     expect {subject.release_bike}.to raise_error("Error: cannot release broken bike")
   end
-
+end
   # it "Should transfer broken bikes to Van" do
   #   broken_bike = Bike.new
   #   broken_bike.report
@@ -45,6 +48,3 @@ describe DockingStation do
   #   van = Van.new
   #   expect(subject.transfer_bikes(van)).to eq [broken_bike, broken_bike2]
   # end
-
-
-end
