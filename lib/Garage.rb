@@ -1,4 +1,7 @@
+require 'bike_container'
+
 class Garage
+  include BikeContainer
   DEFAULT_CAPACITY = 20
   def initialize(bikes = [], capacity = DEFAULT_CAPACITY)
     @bikes = bikes
@@ -7,21 +10,6 @@ class Garage
   attr_reader :capacity
   attr_reader :bikes
   attr_writer :bikes
-
-  def transfer_bikes(depot, broken = true)
-    bikes = []
-    for i in 0..@bikes.length-1
-      if broken
-        broken_transfer(i) ? bikes.push(@bikes[i]) : nil
-      else
-        working_transfer(i) ? bikes.push(@bikes[i]) : nil
-      end
-    end
-
-    broken ? @bikes.delete_if { |bike| bike.broken } : @bikes.delete_if { |bike| !bike.broken }
-
-    bikes.each { |bike| depot.bikes.push(bike) }
-  end
 
   def fix_bikes
     for bike in @bikes
