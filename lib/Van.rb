@@ -1,7 +1,10 @@
 class Van
-  def initialize(bikes = [])
+  DEFAULT_CAPACITY = 20
+  def initialize(bikes = [], capacity = DEFAULT_CAPACITY)
     @bikes = bikes
+    @capacity = capacity
   end
+  attr_reader :capacity
   attr_reader :bikes
   attr_writer :bikes
 

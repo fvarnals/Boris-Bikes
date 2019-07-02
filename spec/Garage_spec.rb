@@ -15,12 +15,12 @@ describe Garage do
   #   expect(subject.collect_bikes(van)).to eq [bike1]
   #
   # end
-  it "can transfer bikes to van" do
-    bike1 = Bike.new
-    garage1 = Garage.new([bike1])
-    van = Van.new
-    expect(garage1.transfer_bikes(van,false)).to eq [bike1]
-  end
+  # it "can transfer bikes to van" do
+  #   bike1 = Bike.new
+  #   garage1 = Garage.new([bike1])
+  #   van = Van.new
+  #   expect(garage1.transfer_bikes(van,false)).to eq [bike1]
+  # end
   it "Fixes any broken bikes in the garage" do
     bike1 = Bike.new
     bike1.report
